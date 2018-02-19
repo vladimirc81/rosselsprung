@@ -125,5 +125,5 @@ Inside of app.py there is check for 'ratestask' postgresql and tables (ports, re
 If app notice that there is no tables - it run updates. 
 Each time app.py runs REST API (before it run) - code check if there is postgress.
 
-I did not to use circuitbreakers and backoff python library. 
-Usually it is rl good practice in this cases.
+I did not use circuitbreakers and backoff python library. 
+Usually it is rl good practice to use if we have DB. 
