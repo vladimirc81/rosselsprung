@@ -40,11 +40,15 @@ docker-compose down
 # REST API 
 Description:
 METHOD GET - used for searching avg prices between two ports. We have origin and destination
-This metod use: /v1/rates/<date_from>/<date_to>/<origin>/<destination>/ 
-
+This metod use: 
+```
+/v1/rates/<date_from>/<date_to>/<origin>/<destination>/ 
+```
 METHOD POST - used for insertion prices into DB. For this method we can only use code. 
-This method use: /v1/rates/<date_from>/<date_to>/<orig_code>/<dest_code>/<int:price>/
-
+This method use: 
+```
+/v1/rates/<date_from>/<date_to>/<orig_code>/<dest_code>/<int:price>/
+```
 
 METHOD GET - search avg prices
 
