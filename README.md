@@ -119,11 +119,7 @@ Keep in mind we can not use parent_slug as in METHOD GET.
 Error handling was done proper way. Each know error would be printed in json. 
 If happen that code crash - it would report HTTP 500 (server side issue)
 
-# How we insert DB ? 
-
-Inside of app.py there is check for 'ratestask' postgresql and tables (ports, regions, prices)
-If app notice that there is no tables - it run updates. 
-Each time app.py runs REST API (before it run) - code check if there is postgress.
+# How we connect to DB and why to wait X seconds ? 
 
 I did not use circuitbreakers and backoff python library. 
 Usually it is rl good practice to use if we have DB. 
