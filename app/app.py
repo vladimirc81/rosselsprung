@@ -19,34 +19,12 @@ DB_NAME = 'postgres'
 DB_HOST = 'ratestask'
 
 # IS there postgresql ?
-try:
-   print("We are waiting DB to start up ...")
-   time.sleep(10)
-   conn = psycopg2.connect("dbname='{}' user='{}' password='{}' host='{}'".format(DB_NAME, DB_USER, DB_PASS, DB_HOST))
-   cur = conn.cursor()
-except Exception:
-    print("No DB available!!")
-    sys.exit(1)
+# We going to wait 4 sec for DB to get up.
+time.sleep(4)
 
-# Is there tables ?
-try:
-    cur.execute("select code from ports limit 1;")
-    cur.execute("select price from prices limit 1;")
-    cur.execute("select slug from regions limit 1;")
-except Exception:
-    print("No tables - we are running our update")
-    os.system("$(which psql) -U postgres -h " + DB_HOST + " -f rates.sql > /dev/null 2>&1")
+conn = psycopg2.connect("dbname='{}' user='{}' password='{}' host='{}'".format(DB_NAME, DB_USER, DB_PASS, DB_HOST))
+cur = conn.cursor()
 
-# if is loaded file - does it work ?
-try:
-    cur.close()
-    conn.close()
-    conn = psycopg2.connect("dbname='{}' user='{}' password='{}' host='{}'".format(DB_NAME, DB_USER, DB_PASS, DB_HOST))
-    cur = conn.cursor()
-    cur.execute("select code from ports limit 1;")
-except Exception:
-    print("not possible to update db - quiting.")
-    sys.exit(1)
 
 # Error handling - we want to have for all HTTP codes json response.
 def error_handling(error):
